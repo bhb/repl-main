@@ -5,7 +5,9 @@
             [clojure.spec.alpha :as s]
             [clojure.spec.test.alpha :as st]
             [clojure.stacktrace]
-            [clojure.main]))
+            [clojure.main]
+            [cider-nrepl.main]
+            ))
 
 (def printer (expound/custom-printer {:print-specs? false
                                       :show-valid-values? true
@@ -41,7 +43,14 @@
 
 
 (defn -main []
+  ;; start an nrepl connection
+  (cider-nrepl.main/init ["cider.nrepl/cider-middleware"])
+
+  ;; install expound as spec printer
   (set! s/*explain-out* printer)
-  (st/instrument)
+
+  ;; install pyro to display stack traces
   (pyro/swap-stacktrace-engine!)
+
+  ;; start rebel-readline
   (rebel-readline.clojure.main/repl :caught repl-caught))

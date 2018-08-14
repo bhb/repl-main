@@ -1,3 +1,4 @@
 {:deps {com.bhauman/rebel-readline {:mvn/version "0.1.4"}
         venantius/pyro {:mvn/version "0.1.2"}
-        expound {:mvn/version "0.7.1"}}}
+        expound {:mvn/version "0.7.1"}
+        cider/cider-nrepl {:mvn/version "0.17.0"}}}
